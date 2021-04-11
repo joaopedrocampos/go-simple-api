@@ -15,13 +15,7 @@ func main() {
 
 	initializeRouter()
 
-	port := os.Getenv("PORT")
-
-	if port != "" {
-		port = ":" + port
-	} else {
-		port = ":8080"
-	}
+	port := portHandler()
 
 	log.Println("Server listening on port", port)
 	log.Fatal(http.ListenAndServe(port, nil))
@@ -36,4 +30,15 @@ func initializeRouter() {
 	r.NotFoundHandler = handlers.NotFoundHandler()
 
 	http.Handle("/", r)
+}
+
+// port should have the pattern :{PORT}, e.g: :8080
+func portHandler() string {
+	port := os.Getenv("PORT")
+
+	if port != "" {
+		return ":" + port
+	}
+
+	return ":8080"
 }
