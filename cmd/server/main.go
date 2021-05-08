@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 
 	"github.com/joaopedrocampos/go-simple-api/cmd/server/handlers"
+	"github.com/joaopedrocampos/go-simple-api/cmd/server/middlewares"
 )
 
 func main() {
@@ -24,9 +25,14 @@ func main() {
 func initializeRouter() {
 	r := mux.NewRouter()
 
+	// register routes
 	r.HandleFunc("/hello", handlers.HelloWorldHandler).Methods("GET")
 	r.HandleFunc("/ping", handlers.HealthcheckHandler).Methods("GET")
 
+	// register middlewares
+	r.Use(middlewares.RequestUriMiddleware())
+
+	// not found handler
 	r.NotFoundHandler = handlers.NotFoundHandler()
 
 	http.Handle("/", r)
