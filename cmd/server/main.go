@@ -30,6 +30,7 @@ func initializeRouter() {
 	r.HandleFunc("/ping", handlers.HealthcheckHandler).Methods("GET")
 
 	// register middlewares
+	r.Use(middlewares.AuthenticationMiddleware())
 	r.Use(middlewares.RequestUriMiddleware())
 
 	// not found handler
