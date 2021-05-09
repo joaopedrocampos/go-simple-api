@@ -29,7 +29,7 @@ func HealthcheckHandler(w http.ResponseWriter, req *http.Request) {
 
 // Not found handler
 func NotFoundHandler() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		data, _ := json.Marshal(
 			notFound{
 				Code:    http.StatusNotFound,
