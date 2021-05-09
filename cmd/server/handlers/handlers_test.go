@@ -46,6 +46,23 @@ func TestHealthcheckHandler(t *testing.T) {
 		End()
 }
 
+func TestNotFoundHandler(t *testing.T) {
+	r := mux.NewRouter()
+	r.NotFoundHandler = NotFoundHandler()
+
+	ts := httptest.NewServer(r)
+	defer ts.Close()
+
+	apitest.New().
+		Report(apitest.SequenceDiagram()).
+		Handler(r).
+		Get("/notfound").
+		Expect(t).
+		Body(`{"code":404,"error":"Not Found","message":"Fallback reached"}`).
+		Status(404).
+		End()
+}
+
 func TestMissingAuthorizationHeaders(t *testing.T) {
 	r := mux.NewRouter()
 	r.HandleFunc("/ping", HealthcheckHandler)
