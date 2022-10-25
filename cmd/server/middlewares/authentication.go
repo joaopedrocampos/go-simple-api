@@ -15,7 +15,7 @@ type unauthorizedError struct {
 	Message string `json:"message"`
 }
 
-// Middleware responsible for authentication
+// AuthenticationMiddleware - Responsible for authorization
 func AuthenticationMiddleware() mux.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

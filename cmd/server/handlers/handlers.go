@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Hello world handler
+// HelloWorldHandler - Hello world
 func HelloWorldHandler(w http.ResponseWriter, req *http.Request) {
 	data, _ := json.Marshal(
 		helloWorld{
@@ -16,7 +16,7 @@ func HelloWorldHandler(w http.ResponseWriter, req *http.Request) {
 	writeResponse(w, http.StatusOK, data)
 }
 
-// Healthchech handler
+// HealthcheckHandler - Healthchech
 func HealthcheckHandler(w http.ResponseWriter, req *http.Request) {
 	data, _ := json.Marshal(
 		healthcheck{
@@ -27,7 +27,7 @@ func HealthcheckHandler(w http.ResponseWriter, req *http.Request) {
 	writeResponse(w, http.StatusOK, data)
 }
 
-// Not found handler
+// NotFoundHandler - Not found
 func NotFoundHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		data, _ := json.Marshal(
