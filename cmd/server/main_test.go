@@ -6,6 +6,7 @@ import (
 )
 
 func TestDefaultPortHandler(t *testing.T) {
+
 	port := portHandler()
 
 	if port != ":8080" {

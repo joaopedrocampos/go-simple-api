@@ -41,9 +41,9 @@ func initializeRouter() {
 
 // port should have the pattern :{PORT}, e.g: :8080
 func portHandler() string {
-	port := os.Getenv("PORT")
+	port, ok := os.LookupEnv("PORT")
 
-	if port != "" {
+	if ok {
 		return ":" + port
 	}
 
